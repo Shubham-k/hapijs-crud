@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <a href="/home" style="margin: 10px">Home</a>
+      <a href="/about" style="margin: 10px">About</a>
+      <a href="/signup" style="margin: 10px">Sign-up</a>
+      <a href="/login" style="margin: 10px">Sign-in</a>
+    </div>
+    <form action="/welcome" method="POST">
+      <div>
+        <label>Fist Name</label>
+        <input type="text" placeholder="first name" name="firstName" />
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input type="text" placeholder="Last name" name="lastName" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="text" placeholder="Your Email" name="email" />
+      </div>
+      <div>
+        <label>Mobile no</label>
+        <input
+          type="number"
+          placeholder="enter your phone number"
+          name="mobileNo"
+        />
+      </div>
+      <div>
+        <label>Age</label>
+        <input type="number" placeholder="enter your age" name="age" />
+      </div>
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="enter your password"
+          name="password"
+        />
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          placeholder="confirm your password"
+          name="confirmPassword"
+        />
+      </div>
+      <div>
+        <input type="submit" value="sign-up" />
+      </div>
+    </form>
+  </body>
+</html>
