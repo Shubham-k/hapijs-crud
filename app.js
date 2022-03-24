@@ -172,20 +172,24 @@ server.route({
 server.route({
   method: "POST",
   path: "/welcome",
-  handler: (request, h) => {
+  handler: async (request, h) => {
     if (request.payload.password === request.payload.confirmPassword) {
       const hashedPassword = passwordWork.hashPassword(
         request.payload.password
       );
-      createUser(
-        request.payload.firstName,
-        request.payload.lastName,
-        request.payload.email,
-        request.payload.mobileNo,
-        request.payload.age,
-        hashedPassword,
-        hashedPassword
-      );
+      try {
+        const result = await createUser(
+          request.payload.firstName,
+          request.payload.lastName,
+          request.payload.email,
+          request.payload.mobileNo,
+          request.payload.age,
+          hashedPassword,
+          hashedPassword
+        );
+      } catch (error) {
+        return h.response({ error });
+      }
       return h.view("welcome");
     }
     return h.response({ error: "password did't matched!" }).code(400);

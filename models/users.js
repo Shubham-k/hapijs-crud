@@ -1,5 +1,6 @@
 const connection = require("../dbconfig/index");
 const dbConnection = connection.connect;
+const boom = require("@hapi/boom");
 
 //used for setting up the dataTypes
 const { DataTypes } = require("sequelize");
@@ -25,6 +26,7 @@ const Users = dbConnection.define(
     },
     mobileNo: {
       type: DataTypes.BIGINT,
+      unique: true,
     },
     age: {
       type: DataTypes.INTEGER,
@@ -39,12 +41,12 @@ const Users = dbConnection.define(
   { freezeTableName: true, timestamps: false }
 );
 
-//this code requires in starting if the table is not created or if you want to overwrite a table
+// this code requires in starting if the table is not created or if you want to overwrite a table
 // dbConnection.drop().then(() => {
 //   dbConnection.sync();
 // });
 
-const createUser = (
+const createUser = async (
   firstName,
   lastName,
   email,
@@ -53,21 +55,19 @@ const createUser = (
   password,
   confirmPassword
 ) => {
-  Users.create({
-    firstName,
-    lastName,
-    email,
-    mobileNo,
-    age,
-    password,
-    confirmPassword,
-  })
-    .then((data) => {
-      // console.log(data.dataValues);
-    })
-    .catch((error) => {
-      console.log(error.message);
+  try {
+    const data = await Users.create({
+      firstName,
+      lastName,
+      email,
+      mobileNo,
+      age,
+      password,
+      confirmPassword,
     });
+  } catch (error) {
+    throw error.errors[0].message;
+  }
 };
 
 module.exports = createUser;
